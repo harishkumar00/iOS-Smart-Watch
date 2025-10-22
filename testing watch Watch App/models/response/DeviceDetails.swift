@@ -65,14 +65,12 @@ enum DeviceStatus: Codable {
 // Lock Status
 struct LockStatus: Codable {
     let mode: Mode?
-    let battery: Int?
     let powerSource: String?
     let zwaveSignal: Int?
     let batteryZwave: Int?
     
     enum CodingKeys: String, CodingKey {
         case mode = "mode"
-        case battery = "battery"
         case powerSource = "power_source"
         case zwaveSignal = "zwave_signal"
         case batteryZwave = "battery_zwave"

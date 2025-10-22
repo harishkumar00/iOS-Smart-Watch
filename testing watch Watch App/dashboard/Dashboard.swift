@@ -4,6 +4,7 @@ struct Dashboard: View {
     
     @Environment(Router.self) private var router
     @StateObject private var deviceList = DeviceListViewModel.shared
+    @StateObject private var errorViewModel = ErrorViewModel.shared
     
     var lockDevices: [Device] {
         deviceList.devices.filter { $0.deviceType == "lock" }
@@ -15,33 +16,48 @@ struct Dashboard: View {
     
     // TODO:: When any device is added connect to MQTT for the asset if not connected and subscribe to the device
     var body: some View {
-        ZStack {
-            ScrollView {
-                VStack(spacing: 8) {
-                    lockTabView
-                    thermostatTabView
-                }
-            }
-            .overlay {
-                if deviceList.dashboardLoader {
-                    ProgressView()
-                }
-            }
-            .task {
-                if deviceList.devices.isEmpty {
-                    if let assetDeviceMap = DefaultsManager.get(
-                        forKey: UserDefaultsKeys.ASSET_DEVICE_MAP,
-                        as: [String: [String]].self
-                    ) {
-                        let allDeviceIds = assetDeviceMap.values.flatMap { $0 }
-                        
-                        await deviceList.fetchData(for: allDeviceIds)
+        Group {
+            if errorViewModel.syncRequired {
+                SyncRequired()
+            } else {
+                ZStack {
+                    ScrollView {
+                        VStack(spacing: 8) {
+                            lockTabView
+                            thermostatTabView
+                        }
+                    }
+                    .overlay {
+                        if deviceList.dashboardLoader {
+                            ProgressView()
+                        }
+                    }
+                    .task {
+                        if deviceList.devices.isEmpty {
+                            if let assetDeviceMap = DefaultsManager.get(
+                                forKey: UserDefaultsKeys.ASSET_DEVICE_MAP,
+                                as: [String: [String]].self
+                            ) {
+                                let allDeviceIds = assetDeviceMap.values.flatMap { $0 }
+                                
+                                await deviceList.fetchData(for: allDeviceIds)
+                            }
+                        }
                     }
                 }
+                .navigationTitle("Smart Home")
+                .navigationBarTitleDisplayMode(.inline)
             }
         }
-        .navigationTitle("Smart Home")
-        .navigationBarTitleDisplayMode(.inline)
+        .alert(isPresented: $errorViewModel.isErrorModalVisible) {
+            Alert(
+                title: Text(errorViewModel.title ?? "Error"),
+                message: Text(errorViewModel.errorMessage ?? ""),
+                dismissButton: .default(Text("OK")) {
+                    errorViewModel.clearError()
+                }
+            )
+        }
     }
     
     private var lockTabView: some View {
@@ -80,5 +96,32 @@ struct Dashboard: View {
                 .frame(maxWidth: .infinity, minHeight: 210, maxHeight: 210)
             }
         }
+    }
+}
+
+struct SyncRequired: View {
+    
+    var body: some View {
+        ScrollView {
+            VStack {
+                Text("Sync Required or phone disconnected.")
+                    .font(.callout)
+                    .fontWeight(.semibold)
+                    .multilineTextAlignment(.center)
+            }
+            .frame(maxWidth: .infinity)
+            
+            VStack {
+                Text("Please check your phone's connection and open the Smart Home app on your phone to Manage > Sync Smart Watch.")
+                    .font(.callout)
+                    .multilineTextAlignment(.center)
+                    .padding(.horizontal)
+            }
+            .padding(.top, 2)
+            .frame(maxWidth: .infinity)
+        }
+        .padding()
+        .navigationTitle("Smart Home")
+        .navigationBarTitleDisplayMode(.inline)
     }
 }

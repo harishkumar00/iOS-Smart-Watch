@@ -26,8 +26,8 @@ final class NetworkService {
         if let token = await TokenService.shared.validAccessToken() {
             request.setValue("Bearer \(token)", forHTTPHeaderField: "Authorization")
         } else {
-            // TODO::
-            print("Network: No valid token available")
+            ErrorViewModel.shared.showSyncRequired()
+            return nil
         }
         
         request.httpBody = body
@@ -62,7 +62,19 @@ final class NetworkService {
             
             if !(200..<300).contains(httpResponse.statusCode) {
                 let errorMessage = String(data: data, encoding: .utf8)
-                print("Network: Server Error \(httpResponse.statusCode) - \(errorMessage ?? "Unknown Error")")
+                
+                switch httpResponse.statusCode {
+                case 400, 401, 403:
+                    ErrorViewModel.shared.showSyncRequired()
+                case 500...599:
+                    ErrorViewModel.shared.showSyncRequired()
+                default:
+                    ErrorViewModel.shared.showError(
+                        title: "Server Error: \(httpResponse.statusCode)",
+                        message: errorMessage ?? "Unknown error occurred."
+                    )
+                }
+
                 return .failure(.serverError(httpResponse.statusCode, errorMessage))
             }
             
@@ -94,7 +106,6 @@ final class NetworkService {
         
         print(log)
     }
-    
     
     private func logResponse(_ data: Data) {
         guard !data.isEmpty else {
