@@ -9,11 +9,11 @@ class Router {
     func navigateToThermostatDetails(deviceId: String) {
         path.append(Route.thermostatDetails(deviceId: deviceId))
     }
-
+    
     func navigateToModeSelection(deviceId: String) {
         path.append(Route.modeSelection(deviceId: deviceId))
     }
-
+    
     func popToRoot() {
         path.removeLast(path.count)
     }

@@ -42,7 +42,7 @@ enum Env: String {
 
 class EnvConfig {
     static let current: Env = .qeop
-
+    
     static var values: EnvValues {
         return current.values
     }

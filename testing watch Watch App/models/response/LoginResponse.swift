@@ -5,7 +5,7 @@ struct LoginResponse: Codable {
     let accessToken: String
     let refreshToken: String
     let idToken: String
-
+    
     enum CodingKeys: String, CodingKey {
         case success = "success"
         case accessToken = "access_token"

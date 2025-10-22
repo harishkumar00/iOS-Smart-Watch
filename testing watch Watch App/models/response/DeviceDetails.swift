@@ -18,7 +18,7 @@ struct Device: Codable {
     let zWaveSecurity: String?
     let status: DeviceStatus?
     let settings: Settings?
-
+    
     enum CodingKeys: String, CodingKey {
         case batteryUpdatedAt = "battery_updated_at"
         case deviceName = "device_name"
@@ -69,7 +69,7 @@ struct LockStatus: Codable {
     let powerSource: String?
     let zwaveSignal: Int?
     let batteryZwave: Int?
-
+    
     enum CodingKeys: String, CodingKey {
         case mode = "mode"
         case battery = "battery"
@@ -96,19 +96,19 @@ struct ThermostatStatus: Codable {
     let coolingSetpoint: Int?
     let heatingSetpoint: Int?
     let batteryZwave: Int?
-
+    
     enum CodingKeys: String, CodingKey {
-         case fan = "fan"
-         case mode = "mode"
-         case battery = "battery"
-         case roomTemp = "room_temp"
-         case powerSource = "power_source"
-         case zwaveSignal = "zwave_signal"
-         case roomHumidity = "room_humidity"
-         case operatingState = "operating_state"
-         case coolingSetpoint = "cooling_setpoint"
-         case heatingSetpoint = "heating_setpoint"
-         case batteryZwave = "battery_zwave"
+        case fan = "fan"
+        case mode = "mode"
+        case battery = "battery"
+        case roomTemp = "room_temp"
+        case powerSource = "power_source"
+        case zwaveSignal = "zwave_signal"
+        case roomHumidity = "room_humidity"
+        case operatingState = "operating_state"
+        case coolingSetpoint = "cooling_setpoint"
+        case heatingSetpoint = "heating_setpoint"
+        case batteryZwave = "battery_zwave"
     }
 }
 
@@ -116,7 +116,7 @@ struct Settings: Codable {
     let schedule: String?
     
     enum CodingKeys: String, CodingKey {
-         case schedule = "schedule"
+        case schedule = "schedule"
     }
 }
 

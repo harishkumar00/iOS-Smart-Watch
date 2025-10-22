@@ -2,7 +2,7 @@ import SwiftUI
 
 @main
 struct testing_watch_Watch_AppApp: App {
-        
+    
     var body: some Scene {
         WindowGroup {
             // TODO:: Need show the error alert if needed and show when moveout or API fails

@@ -110,7 +110,7 @@ struct ModeSelection: View {
             let heatingSetPoint = (mode == .auto) ? thermostatStatus?.heatingSetpoint  : nil
             let coolingSetPoint = (mode == .auto) ? thermostatStatus?.coolingSetpoint : nil
             let setPoint = (mode == .cool) ? thermostatStatus?.coolingSetpoint :
-                           (mode == .heat) ? thermostatStatus?.heatingSetpoint : nil
+            (mode == .heat) ? thermostatStatus?.heatingSetpoint : nil
             
             let command = ThermostatCommand(
                 mode: mode.rawValue.lowercased(),
@@ -121,7 +121,7 @@ struct ModeSelection: View {
             
             let request = DeviceUpdateRequest.thermostat(command)
             let result = await DeviceAPI.updateDevice(deviceId: deviceId, requestBody: request)
-
+            
             if case .failure(let error) = result {
                 print("Error updating device: \(error)")
             }

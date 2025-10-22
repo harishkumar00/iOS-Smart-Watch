@@ -43,17 +43,17 @@ struct CenteredSlider: View {
                             Rectangle().frame(height: 1).foregroundColor(LocalColor.Secondary.dark)
                         }
                     )
-
-                // Center Highlight Box (optional visual marker)
-//                RoundedRectangle(cornerRadius: 8)
-//                    .stroke(Color.white.opacity(0.3), lineWidth: 2)
-//                    .frame(width: itemWidth, height: 50)
-//                    .zIndex(1)
                 
-                    RoundedRectangle(cornerRadius: 8)
-                        .fill(highlightColor)
-                        .frame(width: itemWidth, height: 50)
-                        .zIndex(0)
+                // Center Highlight Box (optional visual marker)
+                //                RoundedRectangle(cornerRadius: 8)
+                //                    .stroke(Color.white.opacity(0.3), lineWidth: 2)
+                //                    .frame(width: itemWidth, height: 50)
+                //                    .zIndex(1)
+                
+                RoundedRectangle(cornerRadius: 8)
+                    .fill(highlightColor)
+                    .frame(width: itemWidth, height: 50)
+                    .zIndex(0)
                 
                 ScrollView(.horizontal, showsIndicators: false) {
                     ScrollViewReader { scrollView in
@@ -111,7 +111,7 @@ struct CenteredSlider: View {
 
 struct ScrollOffsetPreferenceKey: PreferenceKey {
     static var defaultValue: CGFloat = 0
-
+    
     static func reduce(value: inout CGFloat, nextValue: () -> CGFloat) {
         value = nextValue()
     }

@@ -3,7 +3,7 @@ import SwiftUI
 struct OutlinedButton: View {
     
     var title: String
-
+    
     // Font Size Options
     var xs: Bool = false
     var s: Bool = false
@@ -16,22 +16,22 @@ struct OutlinedButton: View {
     var xl26: Bool = false
     var xl28: Bool = false
     var xxl: Bool = false
-
+    
     // Font Weight Options
     var light: Bool = false
     var medium: Bool = false
     var semiBold: Bool = false
     var bold: Bool = false
-
+    
     var heat: Bool = false
     var cool: Bool = false
     var auto: Bool = false
     var off: Bool = false
-
+    
     var cornerRadius: CGFloat = 30
     var isDisabled: Bool = false
     var onClick: () -> Void
-
+    
     var body: some View {
         let fontSize: Font = if xs { .caption2 }
         else if s { .caption }
@@ -45,7 +45,7 @@ struct OutlinedButton: View {
         else if xl28 { .title }
         else if xxl { .largeTitle }
         else { .body }
-
+        
         let fontWeight: Font.Weight = {
             if bold { return .bold }
             if semiBold { return .semibold }
@@ -53,7 +53,7 @@ struct OutlinedButton: View {
             if light { return .light }
             return .regular
         }()
-
+        
         Button(action: {
             if !isDisabled {
                 onClick()
@@ -76,7 +76,7 @@ struct OutlinedButton: View {
         .buttonStyle(PlainButtonStyle())
         .disabled(isDisabled)
     }
-
+    
     private func containerColor() -> Color {
         if isDisabled {
             return Color.gray.opacity(0.2)
@@ -92,7 +92,7 @@ struct OutlinedButton: View {
             return LocalColor.Monochrome.transparent
         }
     }
-
+    
     private func labelColor() -> Color {
         if isDisabled {
             return Color.gray
@@ -102,7 +102,7 @@ struct OutlinedButton: View {
             return LocalColor.Monochrome.white
         }
     }
-
+    
     private func borderColor() -> Color {
         if off {
             return LocalColor.Monochrome.grey

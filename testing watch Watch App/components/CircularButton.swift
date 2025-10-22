@@ -7,7 +7,7 @@ struct CircularButton: View {
     let onLongPress: () -> Void
     var size: CGFloat = 55
     var imageSize: CGFloat = 25
-
+    
     var body: some View {
         ZStack {
             Circle()

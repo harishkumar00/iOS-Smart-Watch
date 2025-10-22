@@ -6,7 +6,7 @@ struct Card<Content: View>: View {
     var backgroundColor: Color = LocalColor.Monochrome.background
     var onClick: () -> Void = {}
     let content: () -> Content
-
+    
     var body: some View {
         Button(action: {
             onClick()

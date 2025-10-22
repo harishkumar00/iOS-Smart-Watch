@@ -9,7 +9,7 @@ class DeviceAPI {
         ) else {
             return nil
         }
-
+        
         let result: Result<Device, NetworkService.NetworkError> = await NetworkService.shared.performRequest(request, decodingType: Device.self)
         switch result {
         case .success(let device): return device
@@ -22,17 +22,17 @@ class DeviceAPI {
     static func updateDevice(deviceId: String, requestBody: DeviceUpdateRequest) async -> Result<UpdateDeviceDetailsResponse, Error> {
         let encoder = JSONEncoder()
         encoder.keyEncodingStrategy = .convertToSnakeCase
-
+        
         guard let data = try? encoder.encode(requestBody),
               let request = await NetworkService.shared.createBaseRequest(
-                  endpoint: "/api/devices/\(deviceId)",
-                  method: "PUT",
-                  body: data
+                endpoint: "/api/devices/\(deviceId)",
+                method: "PUT",
+                body: data
               )
         else {
             return .failure(NetworkService.NetworkError.invalidURL)
         }
-
+        
         return await NetworkService.shared.performRequest(request, decodingType: UpdateDeviceDetailsResponse.self)
             .mapError { $0 as Error } // TODO:: map NetworkError to Error for interface consistency
     }
@@ -44,7 +44,7 @@ class DeviceAPI {
         ) else {
             return .failure(NetworkService.NetworkError.invalidURL)
         }
-
+        
         return await NetworkService.shared
             .performRequest(request, decodingType: GetCognitoCredentialsResponse.self)
             .mapError { $0 as Error }

@@ -12,7 +12,7 @@ struct Dashboard: View {
     var thermostatDevices: [Device] {
         deviceList.devices.filter { $0.deviceType == "thermostat" }
     }
-
+    
     // TODO:: When any device is added connect to MQTT for the asset if not connected and subscribe to the device
     var body: some View {
         ZStack {
@@ -43,7 +43,7 @@ struct Dashboard: View {
         .navigationTitle("Smart Home")
         .navigationBarTitleDisplayMode(.inline)
     }
-
+    
     private var lockTabView: some View {
         Group {
             if !lockDevices.isEmpty {
@@ -60,7 +60,7 @@ struct Dashboard: View {
             }
         }
     }
-
+    
     private var thermostatTabView: some View {
         Group {
             if !thermostatDevices.isEmpty {

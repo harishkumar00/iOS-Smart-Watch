@@ -20,18 +20,18 @@ struct Thermostat: View {
     let deviceId: String
     @Environment(Router.self) private var router
     @ObservedObject private var viewModel = DeviceListViewModel.shared
-
+    
     private var thermostatStatus: ThermostatStatus? {
         if case .thermostatStatus(let status)? = viewModel.devices.first(where: { $0.id == deviceId })?.status {
             return status
         }
         return nil
     }
-
+    
     private var mode: ThermostatMode {
         ThermostatMode(from: thermostatStatus?.mode)
     }
-
+    
     private var indoorTemp: String {
         if let temp = thermostatStatus?.roomTemp {
             return "\(temp)°"
@@ -47,7 +47,7 @@ struct Thermostat: View {
             return "Not Active"
         }
     }
-
+    
     private var scheduleColor: Color {
         if let schedule = viewModel.devices.first(where: { $0.id == deviceId })?.settings?.schedule,
            !schedule.isEmpty {
@@ -56,7 +56,7 @@ struct Thermostat: View {
             return LocalColor.Monochrome.grey
         }
     }
-
+    
     // TODO:: Add 3 degree logic and min set point if not present
     private var setPoint: String {
         guard let status = thermostatStatus else { return "--" }
@@ -71,7 +71,7 @@ struct Thermostat: View {
             return "--"
         }
     }
-
+    
     var body: some View {
         VStack(alignment: .leading) {
             
@@ -86,7 +86,7 @@ struct Thermostat: View {
                 off: mode == .off,
                 onClick: { router.navigateToModeSelection(deviceId: deviceId) }
             )
-
+            
             
             VStack {
                 ThermostatRow(title: "Indoor", value: indoorTemp)

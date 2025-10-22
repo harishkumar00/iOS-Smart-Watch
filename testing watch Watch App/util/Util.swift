@@ -9,7 +9,7 @@ struct Util {
     func getValuesFromUserDefaults(key: String) -> String {
         let defaults = UserDefaults.standard
         let value = defaults.string(forKey: key)
-
+        
         return value ?? ""
     }
 }

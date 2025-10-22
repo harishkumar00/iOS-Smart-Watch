@@ -61,17 +61,17 @@ struct Label: View {
         }()
         
         let fontSize: Font = if xs { .caption2 }
-            else if s { .caption }
-            else if m { .footnote }
-            else if l { .callout }
-            else if xl18 { .body }
-            else if xl20 { .subheadline }
-            else if xl22 { .headline }
-            else if xl24 { .title3 }
-            else if xl26 { .title2 }
-            else if xl28 { .title }
-            else if xxl { .largeTitle }
-            else { .largeTitle }
+        else if s { .caption }
+        else if m { .footnote }
+        else if l { .callout }
+        else if xl18 { .body }
+        else if xl20 { .subheadline }
+        else if xl22 { .headline }
+        else if xl24 { .title3 }
+        else if xl26 { .title2 }
+        else if xl28 { .title }
+        else if xxl { .largeTitle }
+        else { .largeTitle }
         
         let fontWeight: Font.Weight = {
             if bold { return .bold }

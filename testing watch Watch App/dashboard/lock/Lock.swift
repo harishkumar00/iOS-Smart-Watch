@@ -7,27 +7,27 @@ enum LockMode: String {
 
 struct Lock: View {
     let deviceId: String
-
+    
     @State private var showHoldLabelFor: LockMode? = nil
     @State private var holdLabelText = ""
-
+    
     @ObservedObject private var viewModel = DeviceListViewModel.shared
-
+    
     private var lockDevice: Device? {
         viewModel.devices.first { $0.id == deviceId }
     }
-
+    
     private var thingName: String {
         lockDevice?.iotThingName ?? ""
     }
-
+    
     private var lockStatusText: String {
         guard case .lockStatus(let lockStatus)? = lockDevice?.status else {
             return "UNKNOWN"
         }
         return lockStatus.mode?.type?.uppercased() ?? "UNKNOWN"
     }
-
+    
     var body: some View {
         VStack(alignment: .leading) {
             VStack(alignment: .leading) {
@@ -75,28 +75,28 @@ struct Lock: View {
         .padding(.horizontal, 5)
         .frame(maxWidth: .infinity, maxHeight: .infinity, alignment: .topLeading)
     }
-
+    
     private func showHint(for mode: LockMode) {
         showHoldLabelFor = mode
         DispatchQueue.main.asyncAfter(deadline: .now() + 2) {
             showHoldLabelFor = nil
         }
     }
-
+    
     private func handleLockAction(mode: LockMode) {
         guard !thingName.isEmpty else { return }
-
+        
         if mode == .lock {
             viewModel.setLockLoading(for: thingName, isLoading: true)
         } else {
             viewModel.setUnlockLoading(for: thingName, isLoading: true)
         }
-
+        
         Task {
             let command = LockCommand(mode: mode.rawValue.lowercased())
             let request = DeviceUpdateRequest.lock(command)
             let result = await DeviceAPI.updateDevice(deviceId: deviceId, requestBody: request)
-
+            
             switch result {
             case .success(let response):
                 print("Device updated: \(response)")
@@ -104,9 +104,9 @@ struct Lock: View {
                 // TODO:: Retrun and close the loader
                 print("Error updating device: \(error)")
             }
-
+            
             try? await Task.sleep(nanoseconds: MQTT.timeoutNanoseconds)
-
+            
             if viewModel.lockLoading[thingName] ?? false || viewModel.unlockLoading[thingName] ?? false {
                 let deviceResult = await DeviceAPI.fetchDevice(deviceId: deviceId)
                 if let device = deviceResult {
@@ -114,7 +114,7 @@ struct Lock: View {
                 } else {
                     print("Error in API call after 8 seconds")
                 }
-
+                
                 if mode == .lock {
                     viewModel.setLockLoading(for: thingName, isLoading: false)
                 } else {
@@ -123,7 +123,7 @@ struct Lock: View {
             }
         }
     }
-
+    
     @ViewBuilder
     private func actionButton(
         imageName: String,

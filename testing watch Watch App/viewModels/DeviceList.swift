@@ -11,7 +11,7 @@ class DeviceListViewModel: ObservableObject {
     
     static let shared = DeviceListViewModel()
     private init() {}
-
+    
     @Published var devices: [Device] = []
     @Published var dashboardLoader: Bool = false
     
@@ -52,33 +52,33 @@ class DeviceListViewModel: ObservableObject {
     
     // MARK: - MQTT Device Update
     func updateDeviceFromMQTT(topic: String, payload: String) {
-
+        
     }
-
+    
     // MARK: - Helpers
     func getDevice(by id: String) -> Device? {
         devices.first { $0.id == id }
     }
-
+    
     func updateDevice(by id: String, update: (Device) -> Device) {
         if let index = devices.firstIndex(where: { $0.id == id }) {
             devices[index] = update(devices[index])
         }
     }
-
+    
     // MARK: - Loading State Management
     func setLockLoading(for thingName: String, isLoading: Bool) {
         lockLoading[thingName] = isLoading
     }
-
+    
     func setUnlockLoading(for thingName: String, isLoading: Bool) {
         unlockLoading[thingName] = isLoading
     }
-
+    
     func setModeSettingLoading(for thingName: String, isLoading: Bool) {
         modeSettingLoading[thingName] = isLoading
     }
-
+    
     func setSetPointSettingLoading(for thingName: String, isLoading: Bool) {
         setPointSettingLoading[thingName] = isLoading
     }

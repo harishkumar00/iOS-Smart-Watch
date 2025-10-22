@@ -85,7 +85,7 @@ struct ThermostatDetails: View {
             
             let request = DeviceUpdateRequest.thermostat(command)
             let result = await DeviceAPI.updateDevice(deviceId: deviceId, requestBody: request)
-
+            
             switch result {
             case .success(let response):
                 print("Device updated: \(response)")
@@ -105,7 +105,7 @@ struct ThermostatDetails: View {
                     print("Error in API call after 8 seconds")
                 }
             }
-                
+            
             viewModel.setSetPointSettingLoading(for: thingName, isLoading: false)
         }
     }
@@ -123,11 +123,11 @@ struct TopSection: View {
         }
         return nil
     }
-
+    
     private var mode: ThermostatMode {
         ThermostatMode(from: thermostatStatus?.mode)
     }
-
+    
     private var indoorTemp: String {
         if let temp = thermostatStatus?.roomTemp {
             return "\(temp)°"

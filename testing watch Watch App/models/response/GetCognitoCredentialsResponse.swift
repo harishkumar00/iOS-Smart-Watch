@@ -8,7 +8,7 @@ struct GetCognitoCredentialsResponse: Codable {
     let region: String
     let accountId: String
     let providerName: String
-
+    
     enum CodingKeys: String, CodingKey {
         case identityPoolId = "identity_pool_id"
         case identityId = "identity_id"

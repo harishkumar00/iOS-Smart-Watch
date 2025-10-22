@@ -12,7 +12,7 @@ class AuthAPI {
             ) else {
                 return .failure(NetworkService.NetworkError.invalidURL)
             }
-
+            
             return await NetworkService.shared
                 .performRequest(req, decodingType: LoginResponse.self)
                 .mapError { $0 as Error }
@@ -31,7 +31,7 @@ class AuthAPI {
             ) else {
                 return .failure(NetworkService.NetworkError.invalidURL)
             }
-
+            
             return await NetworkService.shared
                 .performRequest(req, decodingType: TokenResponse.self)
                 .mapError { $0 as Error }
