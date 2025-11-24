@@ -22,6 +22,7 @@
 		023CDE5C2DFADF8C00078895 /* off.png in Resources */ = {isa = PBXBuildFile; fileRef = 023CDE5B2DFADF8C00078895 /* off.png */; };
 		023CDE5D2DFADF8C00078895 /* heat.png in Resources */ = {isa = PBXBuildFile; fileRef = 023CDE5A2DFADF8C00078895 /* heat.png */; };
 		023CDE5E2DFADF8C00078895 /* cool.png in Resources */ = {isa = PBXBuildFile; fileRef = 023CDE592DFADF8C00078895 /* cool.png */; };
+		025D3BBE2ED4313E0078C1BE /* ErrorViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 025D3BBD2ED4313E0078C1BE /* ErrorViewModel.swift */; };
 		026989E62E4DBBEC00358231 /* tick.png in Resources */ = {isa = PBXBuildFile; fileRef = 026989E52E4DBBEC00358231 /* tick.png */; };
 		026989E82E4DBBFA00358231 /* cancel.png in Resources */ = {isa = PBXBuildFile; fileRef = 026989E72E4DBBFA00358231 /* cancel.png */; };
 		026EC5452D0CAFFB0045011C /* testingApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 026EC5442D0CAFFB0045011C /* testingApp.swift */; };
@@ -103,6 +104,7 @@
 		023CDE592DFADF8C00078895 /* cool.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cool.png; sourceTree = "<group>"; };
 		023CDE5A2DFADF8C00078895 /* heat.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = heat.png; sourceTree = "<group>"; };
 		023CDE5B2DFADF8C00078895 /* off.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = off.png; sourceTree = "<group>"; };
+		025D3BBD2ED4313E0078C1BE /* ErrorViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorViewModel.swift; sourceTree = "<group>"; };
 		026989E52E4DBBEC00358231 /* tick.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = tick.png; sourceTree = "<group>"; };
 		026989E72E4DBBFA00358231 /* cancel.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = cancel.png; sourceTree = "<group>"; };
 		026EC5412D0CAFFB0045011C /* testing.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = testing.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -294,6 +296,7 @@
 			isa = PBXGroup;
 			children = (
 				02CA78872D0ED3B3002A82E1 /* DeviceList.swift */,
+				025D3BBD2ED4313E0078C1BE /* ErrorViewModel.swift */,
 			);
 			path = viewModels;
 			sourceTree = "<group>";
@@ -513,6 +516,7 @@
 				02E079022E43598900906730 /* LoginResponse.swift in Sources */,
 				02E078FA2E433C5000906730 /* RefreshTokenRequest.swift in Sources */,
 				02A8A5982E546D410087C2F2 /* CircularButton.swift in Sources */,
+				025D3BBE2ED4313E0078C1BE /* ErrorViewModel.swift in Sources */,
 				026EC55B2D0CB1090045011C /* ContentView.swift in Sources */,
 				0236175C2D0DEA7E00CDC183 /* WatchConnector.swift in Sources */,
 				02E078F12E43302400906730 /* DeviceAPI.swift in Sources */,
