@@ -64,7 +64,7 @@ enum DeviceStatus: Codable {
 // TODO:: If needed move to different file like android
 // Lock Status
 struct LockStatus: Codable {
-    let mode: Mode?
+    var mode: Mode?
     let powerSource: String?
     let zwaveSignal: Int?
     let batteryZwave: Int?
@@ -78,21 +78,21 @@ struct LockStatus: Codable {
 }
 
 struct Mode: Codable {
-    let type: String?
+    var type: String?
 }
 
 // Thermostat Staus
 struct ThermostatStatus: Codable {
-    let fan: String?
-    let mode: String?
+    var fan: String?
+    var mode: String?
     let battery: Int?
-    let roomTemp: Int?
+    var roomTemp: Int?
     let powerSource: String?
     let zwaveSignal: Int?
     let roomHumidity: Int?
-    let operatingState: String?
-    let coolingSetpoint: Int?
-    let heatingSetpoint: Int?
+    var operatingState: String?
+    var coolingSetpoint: Int?
+    var heatingSetpoint: Int?
     let batteryZwave: Int?
     
     enum CodingKeys: String, CodingKey {

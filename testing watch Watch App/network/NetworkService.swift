@@ -1,6 +1,24 @@
+import Network
 import Foundation
 
-// TODO:: Also add interceptor for Internet
+final class ConnectivityService {
+    static let shared = ConnectivityService()
+    
+    private let monitor = NWPathMonitor()
+    private let queue = DispatchQueue(label: "NetworkMonitor")
+    
+    private(set) var isConnected: Bool = true
+    
+    private init() {
+        monitor.pathUpdateHandler = { [weak self] path in
+            self?.isConnected = (path.status == .satisfied)
+            print("Network Status:", self?.isConnected == true ? "Connected" : "Disconnected")
+        }
+        
+        monitor.start(queue: queue)
+    }
+}
+
 final class NetworkService {
     static let shared = NetworkService()
     private init() {}
@@ -8,12 +26,23 @@ final class NetworkService {
     enum NetworkError: Error {
         case invalidURL
         case noData
+        case noInternet
         case decodingError(Error)
         case serverError(Int, String?)
         case unknown(Error)
     }
     
     func createBaseRequest(endpoint: String, method: String, body: Data? = nil) async -> URLRequest? {
+        
+        guard ConnectivityService.shared.isConnected else {
+            ErrorViewModel.shared.showError(
+                title: "No Internet Connection",
+                message: "Please check your network connection and try again."
+            )
+            print("API: Request Cancelled → No Internet")
+            return nil
+        }
+        
         guard let url = URL(string: "\(EnvConfig.values.baseUrl)\(endpoint)") else {
             print("Network: Invalid base URL for endpoint: \(endpoint)")
             return nil
@@ -35,6 +64,16 @@ final class NetworkService {
     }
     
     func createAuthRequest(endpoint: String, method: String, body: Data? = nil) -> URLRequest? {
+        
+        guard ConnectivityService.shared.isConnected else {
+            ErrorViewModel.shared.showError(
+                title: "No Internet Connection",
+                message: "Please check your network connection and try again."
+            )
+            print("API: Auth Request Cancelled → No Internet")
+            return nil
+        }
+        
         guard let url = URL(string: "\(EnvConfig.values.authUrl)\(endpoint)") else {
             print("Network: Invalid auth URL for endpoint: \(endpoint)")
             return nil
@@ -51,6 +90,16 @@ final class NetworkService {
         _ request: URLRequest,
         decodingType: T.Type
     ) async -> Result<T, NetworkError> {
+        
+        if ConnectivityService.shared.isConnected == false {
+            ErrorViewModel.shared.showError(
+                title: "No Internet Connection",
+                message: "Please check your network connection and try again."
+            )
+            print("API: Cancelled → No Internet")
+            return .failure(.noInternet)
+        }
+        
         logRequest(request)
         
         do {
