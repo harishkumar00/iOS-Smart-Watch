@@ -75,7 +75,7 @@ struct Thermostat: View {
     var body: some View {
         VStack(alignment: .leading) {
             
-            Label(title: viewModel.devices.first(where: { $0.id == deviceId })?.deviceName ?? "Thermostat", xl18: true, grey: true, left: true)
+            Label(title: viewModel.devices.first(where: { $0.id == deviceId })?.occupantSetting ?? "Thermostat", xl18: true, grey: true, left: true)
                 .padding(.top)
             
             OutlinedButton(

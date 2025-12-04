@@ -66,7 +66,7 @@ struct ThermostatDetails: View {
             coolSetPoint = thermostatStatus?.coolingSetpoint ?? 70
         }
         .ignoresSafeArea(edges: .bottom)
-        .navigationTitle(thermostat?.deviceName ?? "Thermostat")
+        .navigationTitle(thermostat?.occupantSetting ?? "Thermostat")
     }
     
     private func updateThermostatSetpoints() {

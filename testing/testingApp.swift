@@ -1,10 +1,3 @@
-//
-//  testingApp.swift
-//  testing
-//
-//  Created by Harish Kumar on 13/12/24.
-//
-
 import SwiftUI
 
 @main

@@ -31,7 +31,7 @@ struct Lock: View {
     var body: some View {
         VStack(alignment: .leading) {
             VStack(alignment: .leading) {
-                Label(title: lockDevice?.deviceName ?? "Lock", xl18: true, grey: true, left: true)
+                Label(title: lockDevice?.occupantSetting ?? "Lock", xl18: true, grey: true, left: true)
                 Label(title: lockStatusText, xl26: true, snow: true, bold: true, left: true)
             }
             .padding(.top)

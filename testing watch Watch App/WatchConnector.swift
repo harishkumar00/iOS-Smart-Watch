@@ -33,5 +33,3 @@ class WatchConnector: NSObject, WCSessionDelegate, ObservableObject {
         }
     }
 }
-
-
