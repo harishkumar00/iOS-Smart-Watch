@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		020636302EE19E2D009093FD /* NoInternet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0206362F2EE19E2D009093FD /* NoInternet.swift */; };
 		020B2E0D2D0F08D7006ADA95 /* Dashboard.swift in Sources */ = {isa = PBXBuildFile; fileRef = 020B2E0C2D0F08D7006ADA95 /* Dashboard.swift */; };
 		020B2E162D0F2FCA006ADA95 /* Util.swift in Sources */ = {isa = PBXBuildFile; fileRef = 020B2E152D0F2FCA006ADA95 /* Util.swift */; };
 		0232B0072E54506A0041BD22 /* unlock_loader.json in Resources */ = {isa = PBXBuildFile; fileRef = 0232B0062E54506A0041BD22 /* unlock_loader.json */; };
@@ -89,6 +90,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		0206362F2EE19E2D009093FD /* NoInternet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NoInternet.swift; sourceTree = "<group>"; };
 		020B2E0C2D0F08D7006ADA95 /* Dashboard.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Dashboard.swift; sourceTree = "<group>"; };
 		020B2E152D0F2FCA006ADA95 /* Util.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Util.swift; sourceTree = "<group>"; };
 		0232B0062E54506A0041BD22 /* unlock_loader.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = unlock_loader.json; sourceTree = "<group>"; };
@@ -193,6 +195,7 @@
 				02BA83992DEF1C7A0086AE7F /* lock */,
 				02BA83982DEF1C740086AE7F /* thermostat */,
 				020B2E0C2D0F08D7006ADA95 /* Dashboard.swift */,
+				0206362F2EE19E2D009093FD /* NoInternet.swift */,
 			);
 			path = dashboard;
 			sourceTree = "<group>";
@@ -535,6 +538,7 @@
 				02BA839B2DF0757D0086AE7F /* ModeSelection.swift in Sources */,
 				02E078E62E420D2000906730 /* CenterSlider.swift in Sources */,
 				02E078E02E4094F100906730 /* RouterViewModifier.swift in Sources */,
+				020636302EE19E2D009093FD /* NoInternet.swift in Sources */,
 				026EC5592D0CB1090045011C /* testing_watchApp.swift in Sources */,
 				02E078ED2E432FED00906730 /* NetworkService.swift in Sources */,
 				023617682D0E106B00CDC183 /* OutlinedButton.swift in Sources */,
